@@ -10,19 +10,18 @@ import java.util.List;
 
 public class CompanDaoImplTest extends BaseDaoTest<Company> {
 
-    private static final BaseDao<Company> DAO = new CompanDaoImpl(Company.class);
+    private static final BaseDao<Company> DAO = new CompanDaoImpl();
 
     @Override
     protected BaseDao<Company> getDao() {
-        return CompanDaoImpl.getInstance();
+        return DAO;
     }
 
     @Test
     public void save() {
-        CompanDaoImpl dao = new CompanDaoImpl(Company.class);
         Company company = new Company();
         company.setName("Vinty-Company");
-       dao.save(company);
+       DAO.save(company);
     }
 
     @Test
@@ -30,8 +29,6 @@ public class CompanDaoImplTest extends BaseDaoTest<Company> {
         List<Company> all = DAO.findAll();
         System.out.println(all);
     }
-
-
 
     @Override
     protected Company getModel() {

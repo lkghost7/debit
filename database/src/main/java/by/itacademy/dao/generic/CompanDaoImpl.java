@@ -6,20 +6,20 @@ import by.itacademy.model.Company;
 
 public class CompanDaoImpl extends BaseDaoImpl<Company> implements CompanDao {
 
-    private static final Object LOCK = new Object();
-    private static CompanDaoImpl INSTANCE = null;
-    public static CompanDaoImpl getInstance() {
-        if (INSTANCE == null) {
-            synchronized (LOCK) {
-                if (INSTANCE == null) {
-                    INSTANCE = new CompanDaoImpl(Company.class);
-                }
-            }
-        }
-        return INSTANCE;
-    }
-
-    public CompanDaoImpl(Class<Company> modelClass) {
-        super(modelClass);
-    }
+//    private static final Object LOCK = new Object();
+//    private static CompanDaoImpl INSTANCE = null;
+//    public static CompanDaoImpl getInstance() {
+//        if (INSTANCE == null) {
+//            synchronized (LOCK) {
+//                if (INSTANCE == null) {
+//                    INSTANCE = new CompanDaoImpl();
+//                }
+//            }
+//        }
+//        return INSTANCE;
+//    }
+//
+//    public CompanDaoImpl() {
+//        super();
+//    }
 }

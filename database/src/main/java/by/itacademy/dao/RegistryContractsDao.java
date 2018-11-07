@@ -1,6 +1,6 @@
 package by.itacademy.dao;
 
-import by.itacademy.connection.ConnectionPool;
+import static by.itacademy.connection.ConnectionPool.getConnection;
 import by.itacademy.model.RegistryOfContract;
 import org.hibernate.Session;
 
@@ -23,7 +23,7 @@ public class RegistryContractsDao {
     }
 
     public Long save(RegistryOfContract registry) {
-        Session currentSession = ConnectionPool.getInstance().getConnection();
+        Session currentSession = getConnection();
         currentSession.beginTransaction();
         Serializable id = currentSession.save(registry);
         currentSession.getTransaction().commit();
@@ -32,7 +32,7 @@ public class RegistryContractsDao {
     }
 
     public List<RegistryOfContract> findAll() {
-        Session currentSession = ConnectionPool.getInstance().getConnection();
+        Session currentSession = getConnection();
         List<RegistryOfContract> registry = currentSession.createQuery("select r from RegistryOfContract r",
                 RegistryOfContract.class).list();
         currentSession.close();
@@ -40,7 +40,7 @@ public class RegistryContractsDao {
     }
 
     public void delete(RegistryOfContract registry) {
-        Session session = ConnectionPool.getInstance().getConnection();
+        Session session = getConnection();
         session.beginTransaction();
         session.delete(registry);
         session.getTransaction().commit();

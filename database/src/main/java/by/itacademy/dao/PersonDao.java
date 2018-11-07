@@ -7,6 +7,8 @@ import org.hibernate.Session;
 import java.io.Serializable;
 import java.util.List;
 
+import static by.itacademy.connection.ConnectionPool.getConnection;
+
 public class PersonDao {
     private static final Object LOCK = new Object();
     private static PersonDao INSTANCE = null;
@@ -23,7 +25,7 @@ public class PersonDao {
     }
 
     public Long save(Person person) {
-        Session currentSession = ConnectionPool.getInstance().getConnection();
+        Session currentSession = getConnection();
         currentSession.beginTransaction();
         Serializable id = currentSession.save(person);
         currentSession.getTransaction().commit();
@@ -32,7 +34,7 @@ public class PersonDao {
     }
 
     public Person findById(Long id) {
-        Session session = ConnectionPool.getInstance().getConnection();
+        Session session = getConnection();
         session.beginTransaction();
         Person person = session.get(Person.class, id);
         session.close();
@@ -40,7 +42,7 @@ public class PersonDao {
     }
 
     public void delete(Person person) {
-        Session session = ConnectionPool.getInstance().getConnection();
+        Session session = getConnection();
         session.beginTransaction();
         session.delete(person);
         session.getTransaction().commit();
@@ -48,7 +50,7 @@ public class PersonDao {
     }
 
     public List<Person> findAll() {
-        Session currentSession = ConnectionPool.getInstance().getConnection();
+        Session currentSession = getConnection();
         List<Person> personList = currentSession.createQuery("select c from Person c", Person.class).list();
         currentSession.close();
         return personList;
