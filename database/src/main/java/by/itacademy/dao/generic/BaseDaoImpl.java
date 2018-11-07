@@ -6,9 +6,7 @@ import by.itacademy.model.BaseEntity;
 import org.hibernate.Session;
 
 public class BaseDaoImpl<T extends BaseEntity> implements BaseDao<T> {
-
     private final Class<T> modelCalss;
-
 
     public BaseDaoImpl(Class<T> modelClass) {
         this.modelCalss = modelClass;
@@ -21,6 +19,7 @@ public class BaseDaoImpl<T extends BaseEntity> implements BaseDao<T> {
         session.save(entity);
         session.getTransaction().commit();
         session.close();
-
     }
+    
+    
 }
