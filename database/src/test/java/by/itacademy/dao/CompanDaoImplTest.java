@@ -6,9 +6,16 @@ import by.itacademy.dao.generic.CompanDaoImpl;
 import by.itacademy.model.Company;
 import org.junit.Test;
 
+import java.util.List;
+
 public class CompanDaoImplTest extends BaseDaoTest<Company> {
 
-    private BaseDao<Company> dao = new CompanDaoImpl(Company.class);
+    private static final BaseDao<Company> DAO = new CompanDaoImpl(Company.class);
+
+    @Override
+    protected BaseDao<Company> getDao() {
+        return CompanDaoImpl.getInstance();
+    }
 
     @Test
     public void save() {
@@ -18,10 +25,13 @@ public class CompanDaoImplTest extends BaseDaoTest<Company> {
        dao.save(company);
     }
 
-    @Override
-    protected BaseDao<Company> getDao() {
-        return dao;
+    @Test
+    public void findAll() {
+        List<Company> all = DAO.findAll();
+        System.out.println(all);
     }
+
+
 
     @Override
     protected Company getModel() {

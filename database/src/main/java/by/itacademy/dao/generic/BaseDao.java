@@ -2,9 +2,12 @@ package by.itacademy.dao.generic;
 
 import by.itacademy.model.BaseEntity;
 
+import java.util.List;
+
 public interface BaseDao <T extends BaseEntity> {
 
-    void save(T entity);
+    Long save(T entity);
 
+    List<T> findAll();
 
 }
