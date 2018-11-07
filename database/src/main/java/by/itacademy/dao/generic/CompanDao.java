@@ -1,8 +1,14 @@
 package by.itacademy.dao.generic;
 
-import by.itacademy.dao.generic.BaseDao;
+
+
+//public interface CompanDao extends BaseDao<Long, Company> {
+//    Company findByFirstName (String firstName);
+//}
+
 import by.itacademy.model.Company;
 
-public interface CompanDao extends BaseDao<Company> {
+public interface EmployeeDao extends BaseDao<Long, Company> {
+
 
 }
