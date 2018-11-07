@@ -21,7 +21,7 @@ public class EmailDetailDao {
         return INSTANCE;
     }
     public EmailDetail findById(Long id) {
-        Session session = ConnectionPool.getInstance().getConnection();
+        Session session = ConnectionPool.getConnection();
         session.beginTransaction();
         EmailDetail emailDetail = session.get(EmailDetail.class, id);
         session.close();
@@ -29,7 +29,7 @@ public class EmailDetailDao {
     }
 
     public Long save(EmailDetail emailDetail) {
-        Session currentSession = ConnectionPool.getInstance().getConnection();
+        Session currentSession = ConnectionPool.getConnection();
         currentSession.beginTransaction();
         Serializable id = currentSession.save(emailDetail);
         currentSession.getTransaction().commit();
@@ -38,14 +38,14 @@ public class EmailDetailDao {
     }
 
     public List<EmailDetail> findAll() {
-        Session currentSession = ConnectionPool.getInstance().getConnection();
+        Session currentSession = ConnectionPool.getConnection();
         List<EmailDetail> emailDetails = currentSession.createQuery("select e from EmailDetail e", EmailDetail.class).list();
         currentSession.close();
         return emailDetails;
     }
 
     public void delete(EmailDetail emailDetail) {
-        Session session = ConnectionPool.getInstance().getConnection();
+        Session session = ConnectionPool.getConnection();
         session.beginTransaction();
         session.delete(emailDetail);
         session.getTransaction().commit();

@@ -1,21 +1,23 @@
 package by.itacademy.model;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 
-@MappedSuperclass
+
+@Getter
+@Setter
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
-public abstract class BaseEntity {
+@MappedSuperclass
+public abstract class BaseEntity<PK extends Serializable> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
-    private Long id;
+    private PK id;
 }

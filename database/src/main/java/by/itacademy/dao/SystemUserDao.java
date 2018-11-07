@@ -22,7 +22,7 @@ public class SystemUserDao {
     }
 
     public Long save(SystemUser systemUser) {
-        Session currentSession = ConnectionPool.getInstance().getConnection();
+        Session currentSession = ConnectionPool.getConnection();
         currentSession.beginTransaction();
         Serializable id = currentSession.save(systemUser);
         currentSession.getTransaction().commit();
@@ -31,7 +31,7 @@ public class SystemUserDao {
     }
 
     public void delete(Long id) {
-        Session session = ConnectionPool.getInstance().getConnection();
+        Session session = ConnectionPool.getConnection();
         session.beginTransaction();
         SystemUser systemUser = new SystemUser();
         systemUser.setId(id);
@@ -43,11 +43,10 @@ public class SystemUserDao {
     }
 
     public SystemUser findById(Long id) {
-        Session session = ConnectionPool.getInstance().getConnection();
+        Session session = ConnectionPool.getConnection();
         session.beginTransaction();
         SystemUser mySystemUser = session.get(SystemUser.class, id);
         session.close();
         return mySystemUser;
     }
-
 }

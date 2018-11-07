@@ -22,7 +22,7 @@ public class CompanyDao {
     }
 
     public Company findById(Long id) {
-        Session session = ConnectionPool.getInstance().getConnection();
+        Session session = ConnectionPool.getConnection();
         session.beginTransaction();
         Company myCompany = session.get(Company.class, id);
         session.close();
@@ -30,7 +30,7 @@ public class CompanyDao {
     }
 
     public Long save(Company company) {
-        Session currentSession = ConnectionPool.getInstance().getConnection();
+        Session currentSession = ConnectionPool.getConnection();
         currentSession.beginTransaction();
         Serializable id = currentSession.save(company);
         currentSession.getTransaction().commit();
@@ -39,23 +39,17 @@ public class CompanyDao {
     }
 
     public List<Company> findAll() {
-        Session currentSession = ConnectionPool.getInstance().getConnection();
+        Session currentSession = ConnectionPool.getConnection();
         List<Company> companyList = currentSession.createQuery("select c from Company c", Company.class).list();
         currentSession.close();
         return companyList;
     }
 
     public void delete(Company company) {
-        Session session = ConnectionPool.getInstance().getConnection();
+        Session session = ConnectionPool.getConnection();
         session.beginTransaction();
         session.delete(company);
         session.getTransaction().commit();
         session.close();
     }
 }
-
-
-
-
-
-
